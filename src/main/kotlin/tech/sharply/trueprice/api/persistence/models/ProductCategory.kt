@@ -9,5 +9,5 @@ class ProductCategory(
         @Id var id: String,
         var title: String,
         @DBRef var parent: ProductCategory?,
-        var keywords: Set<String>
+        var keywords: Set<String>?
 )
