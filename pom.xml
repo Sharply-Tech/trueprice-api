@@ -72,6 +72,15 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.ktor/ktor-client-core -->
+		<dependency>
+			<groupId>io.ktor</groupId>
+			<artifactId>ktor-client-core</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

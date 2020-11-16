@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "_platforms.platforms")
 class Platform(
         @Id var id: String,
-        @Indexed(unique = true) var userFriendlyId: String,
+        @Indexed(unique = true) var code: String,
         @Indexed(unique = true) var website: String,
         var domains: Set<String>
 ) {
