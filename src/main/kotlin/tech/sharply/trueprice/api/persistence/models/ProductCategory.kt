@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "_catalog.categories")
 class ProductCategory(
-        @Id var id: String,
+        @Id var id: String? = null,
         @Indexed(unique = true) var code: String,
-        var title: String,
-        @DBRef var parent: ProductCategory?,
-        var keywords: Set<String>?
+        var title: String? = null,
+        @DBRef var parent: ProductCategory? = null,
+        var keywords: Set<String>? = null
 )
