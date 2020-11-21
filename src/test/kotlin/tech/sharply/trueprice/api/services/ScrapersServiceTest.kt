@@ -16,14 +16,14 @@ class ScrapersServiceTest(@Autowired val scrapersService: ScrapersService,
         assert(products.isNotEmpty())
     }
 
-    @Test
-    fun `Products fetch and save into the database`() {
-        val products: List<ScrapersService.BasicPlatformProductInfo> = scrapersService.getProducts("emag", "laptopuri", 1)
-        for (productInfo in products) {
-            var product = Product()
-            product.title = productInfo.title
-
-            productRepository.save(product)
-        }
-    }
+//    @Test
+//    fun `Products fetch and save into the database`() {
+//        val products: List<ScrapersService.BasicPlatformProductInfo> = scrapersService.getProducts("emag", "laptopuri", 1)
+//        for (productInfo in products) {
+//            var product = Product()
+//            product.title = productInfo.title
+//
+//            productRepository.save(product)
+//        }
+//    }
 }
