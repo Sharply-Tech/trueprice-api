@@ -6,4 +6,9 @@ import tech.sharply.trueprice.api.persistence.models.platforms.PlatformProductCa
 
 @Repository
 interface PlatformProductCategoryRepository : MongoRepository<PlatformProductCategory, String> {
+
+    fun findByCode(code: String): PlatformProductCategory
+
+    fun findByUrl(url: String): PlatformProductCategory
+
 }

@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository
 import tech.sharply.trueprice.api.persistence.models.ProductCategory
 
 @Repository
-interface ProductCategoryRepository : MongoRepository<ProductCategory, String>
+interface ProductCategoryRepository : MongoRepository<ProductCategory, String> {
+    fun findByCode(code: String): ProductCategoryRepository?
+}

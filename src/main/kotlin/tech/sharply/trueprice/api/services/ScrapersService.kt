@@ -9,6 +9,7 @@ import tech.sharply.trueprice.api.persistence.models.platforms.Platform
 import tech.sharply.trueprice.api.persistence.repositories.ProductRepository
 import tech.sharply.trueprice.api.persistence.repositories.platforms.PlatformRepository
 import java.math.BigDecimal
+import java.net.URL
 
 @Service
 class ScrapersService(
@@ -17,7 +18,6 @@ class ScrapersService(
         @Autowired val platformRepository: PlatformRepository,
         @Autowired val restTemplate: RestTemplate
 ) {
-
 
     fun getProducts(
             platform: Platform,
@@ -37,11 +37,19 @@ class ScrapersService(
             category: String,
             pageIndex: Int
     ): List<BasicPlatformProductInfo> {
-        var response = restTemplate.getForEntity(scrapersServiceConf.baseUrl!!.toURI()
+        val response = restTemplate.getForEntity(scrapersServiceConf.baseUrl!!.toURI()
                 .resolve("/products/${platform}/${category}/page/${pageIndex}"),
                 PageResponse::class.java)
 
         return response.body!!.products
+    }
+
+    fun getProductCategories(platform: String): PlatformProductCategoriesResponse {
+        val response = restTemplate.getForEntity(
+                scrapersServiceConf.baseUrl!!.toURI()
+                        .resolve("/categories/${platform}"),
+                PlatformProductCategoriesResponse::class.java)
+        return response.body!!
     }
 
     data class BasicPlatformProductInfo(
@@ -56,4 +64,14 @@ class ScrapersService(
             val products: List<BasicPlatformProductInfo>
     )
 
+    data class PlatformProductCategoriesResponse(
+            val categories: List<PlatformProductCategoryItemResponse>,
+            val timeEffort: Double
+    )
+
+    data class PlatformProductCategoryItemResponse(
+            val name: String,
+            val url: URL,
+            val code: String
+    )
 }
