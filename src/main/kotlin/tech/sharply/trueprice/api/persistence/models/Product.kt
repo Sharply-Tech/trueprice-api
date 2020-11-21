@@ -8,8 +8,9 @@ import tech.sharply.trueprice.api.models.ProductScore
 @Document(collection = "_catalog.products")
 class Product(
         @Id var id: String,
+        var title: String,
         var gtin: String,
         var manufacturerCode: String,
         @DBRef var category: ProductCategory,
         var score: ProductScore
-)
+) {}
