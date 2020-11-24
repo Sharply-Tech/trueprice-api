@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate
 import tech.sharply.trueprice.api.env.ScrapersServiceConf
 import tech.sharply.trueprice.api.persistence.models.ProductCategory
 import tech.sharply.trueprice.api.persistence.models.platforms.Platform
+import tech.sharply.trueprice.api.persistence.models.platforms.PlatformProductCategory
 import tech.sharply.trueprice.api.persistence.repositories.ProductRepository
 import tech.sharply.trueprice.api.persistence.repositories.platforms.PlatformRepository
 import java.math.BigDecimal
@@ -21,11 +22,11 @@ class ScrapersService(
 
     fun getProducts(
             platform: Platform,
-            category: ProductCategory,
+            category: PlatformProductCategory,
             pageIndex: Int
     ): List<BasicPlatformProductInfo> {
         // TODO: solve the platform category
-        var response = restTemplate.getForEntity(scrapersServiceConf.baseUrl!!.toURI()
+        val response = restTemplate.getForEntity(scrapersServiceConf.baseUrl!!.toURI()
                 .resolve("/products/${platform.code}/${category.code}/page/${pageIndex}"),
                 PageResponse::class.java)
 

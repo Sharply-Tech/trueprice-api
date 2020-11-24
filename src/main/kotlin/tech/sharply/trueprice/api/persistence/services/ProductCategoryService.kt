@@ -19,7 +19,7 @@ class ProductCategoryService(
         @Autowired val productCategoryRepository: ProductCategoryRepository,
         @Autowired val scrapersService: ScrapersService
 ) {
-    private val LOG: Logger = LoggerFactory.getLogger(javaClass)
+    private val _log: Logger = LoggerFactory.getLogger(javaClass)
 
     companion object {
         private const val SOURCE_OF_TRUTH_PLATFORM_CODE = "emag"
@@ -32,13 +32,13 @@ class ProductCategoryService(
     @Scheduled(cron = "0 2 * * MON")
     fun configureSystemProductCategories() {
         // Fetch the categories from the source of truth
-        LOG.info("Configuring system product categories, considering the source of truth: $SOURCE_OF_TRUTH_PLATFORM_CODE")
+        _log.info("Configuring system product categories, considering the source of truth: $SOURCE_OF_TRUTH_PLATFORM_CODE")
 
         val categoriesResponse = scrapersService.getProductCategories(SOURCE_OF_TRUTH_PLATFORM_CODE)
         if (categoriesResponse.categories.isEmpty()) {
-            LOG.error("The scrapers api returned no categories for source of truth: $SOURCE_OF_TRUTH_PLATFORM_CODE");
+            _log.error("The scrapers api returned no categories for source of truth: $SOURCE_OF_TRUTH_PLATFORM_CODE");
         }
-        LOG.info("Scrapers API return ${categoriesResponse.categories.count()} categories, time effort to fetch categories ${categoriesResponse.timeEffort}")
+        _log.info("Scrapers API return ${categoriesResponse.categories.count()} categories, time effort to fetch categories ${categoriesResponse.timeEffort}")
 
         val newCategories = ArrayList<ProductCategory>()
 
@@ -53,13 +53,13 @@ class ProductCategoryService(
                 productCategoryRepository.save(newCategory);
                 newCategories.add(newCategory)
             } catch (ex: Exception) {
-                LOG.error("Could not insert category: ${it.code}", ex)
+                _log.error("Could not insert category: ${it.code}", ex)
             }
         }
         if (newCategories.isEmpty()) {
-            LOG.info("No new categories found.")
+            _log.info("No new categories found.")
         } else {
-           LOG.info("Registered ${newCategories.size} new categories!")
+           _log.info("Registered ${newCategories.size} new categories!")
         }
     }
 }

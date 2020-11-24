@@ -6,5 +6,5 @@ import tech.sharply.trueprice.api.persistence.models.ProductCategory
 
 @Repository
 interface ProductCategoryRepository : MongoRepository<ProductCategory, String> {
-    fun findByCode(code: String): ProductCategoryRepository?
+    fun findByCode(code: String): ProductCategory?
 }
