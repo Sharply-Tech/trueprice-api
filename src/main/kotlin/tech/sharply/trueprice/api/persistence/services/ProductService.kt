@@ -35,7 +35,11 @@ class ProductService(
      * If there is no match then the product is not registered into our system.
      */
     fun identifyProduct(productTitle: String, category: ProductCategory): Product {
+        // FIXME: Algoritmul ce urmeaza a fi implementat a fost dezvoltat pe baza exemplelor din categorie telefoane mobile
+        // FIXME: Cel mai bine s-ar preta ceva pe Text Analysis in acest caz. https://monkeylearn.com/text-analysis/
+    // FIXME: Ar trebui dezvoltat ceva pe baza de AI ca sa se faca totul cat mai bine
         // TODO: Remove keywords related to the category from the title
+
         // TODO: Identify the manufacturer
         // TODO: extract the product name, remove specifications
 
